@@ -24,8 +24,13 @@
         {% for msg in get_flashed_messages(category_filter=["ok"]) %}
         <p class="login-box-msg" style="color:green;">{{ msg }}</p>
         {% endfor %}
+{#        {% for msg in get_flashed_messages() %}#}
+{#            <p class="login-box-msg" style="color:red;">{{ msg }}</p>#}
+{#        {% endfor %}#}
         <form method="POST" id="form-data">
+        <label for="exampleInputEmail1">账号(xxy)</label>
             <div class="form-group has-feedback">
+
                 {{ form.account }}
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 {% for err in form.account.errors %}
@@ -34,7 +39,9 @@
                 </div>
                 {% endfor %}
             </div>
+        <label for="exampleInputEmail1">密码(xxymovie)</label>
             <div class="form-group has-feedback">
+
                 {{ form.pwd }}
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 {% for err in form.pwd.errors %}
@@ -52,7 +59,9 @@
                 </div>
             </div>
         </form>
+
     </div>
+
 </div>
 <script src="{{ url_for('static',filename='admin/plugins/jQuery/jQuery-2.2.0.min.js') }}"></script>
 <script src="{{ url_for('static',filename='admin/bootstrap/js/bootstrap.min.js') }}"></script>

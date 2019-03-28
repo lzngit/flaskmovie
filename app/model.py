@@ -1,15 +1,6 @@
 from datetime import datetime
 
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-# 数据库初始化
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:root@localhost:3306/flaskmovie"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-
-# ====================定义模型===============
-db = SQLAlchemy(app)
+from app import db
 
 
 # 会员模型
@@ -30,6 +21,10 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.name
+
+    def check_pwd(self, pwd):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.pwd, pwd)
 
 
 # 会员登录日志
@@ -154,6 +149,10 @@ class Admin(db.Model):
 
     def __repr__(self):
         return "<Admin %r>" % self.name
+
+    def check_pwd(self, pwd):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.pwd, pwd)
 
 
 # 管理员登录日志
